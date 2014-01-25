@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrisonArchitect", "PrisonArchitect\PrisonArchitect.csproj", "{963E7A38-8B84-410B-B05F-CB1FEC664695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pa-cli", "PaCli\pa-cli.csproj", "{9AB2B2F7-76A2-4C4A-8C1C-BB40C3F15B02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{963E7A38-8B84-410B-B05F-CB1FEC664695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963E7A38-8B84-410B-B05F-CB1FEC664695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963E7A38-8B84-410B-B05F-CB1FEC664695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963E7A38-8B84-410B-B05F-CB1FEC664695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB2B2F7-76A2-4C4A-8C1C-BB40C3F15B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB2B2F7-76A2-4C4A-8C1C-BB40C3F15B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB2B2F7-76A2-4C4A-8C1C-BB40C3F15B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB2B2F7-76A2-4C4A-8C1C-BB40C3F15B02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
