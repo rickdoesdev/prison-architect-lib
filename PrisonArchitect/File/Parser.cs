@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace PrisonArchitect.Parser
+namespace PrisonArchitect.File
 {
     public class Parser
     {
@@ -39,7 +39,7 @@ namespace PrisonArchitect.Parser
             bool header = true;
 
             var blocklevel = 0;
-            var currentBlock = new StringBuilder();
+            var currentBlock = new List<string>();
             string currentblocktype = "";
             // Read from the file until the end of the file is reached.
             while ((line = _streamReader.ReadLine()) != null)
@@ -74,7 +74,7 @@ namespace PrisonArchitect.Parser
                         blocklevel++;
                     }
                     // Process the individual sections of the file
-                    currentBlock.Append(line);
+                    currentBlock.Add(line);
                     if (line.Contains("END"))
                     {
                         blocklevel--;
@@ -83,6 +83,7 @@ namespace PrisonArchitect.Parser
                     {
                         ParseBlock(currentblocktype, currentBlock);
                         currentblocktype = "";
+                        currentBlock = new List<string>();
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace PrisonArchitect.Parser
             }
         }
 
-        private static bool ParseBlock(string type, StringBuilder block)
+        private bool ParseBlock(string type, List<string> block)
         {
             switch (type)
             {
@@ -177,103 +178,148 @@ namespace PrisonArchitect.Parser
             }
         }
 
-        private static bool ParseCells(StringBuilder block)
+        private bool ParseCells(IEnumerable<string> block)
+        {
+            var cells = new Cells();
+
+            foreach (var line in block)
+            {
+                if (line.StartsWith("BEGIN Cells"))
+                {
+                    continue;
+                }
+                if (line.StartsWith("END"))
+                {
+                    continue;
+                }
+
+                var parts = SplitLine(line);
+                Cell cell = new Cell();
+                
+                cell.Position.X = int.Parse(parts[1].Trim(new char[] {'"'}));
+                cell.Position.Y = int.Parse(parts[2].Trim(new char[] {'"'}));
+
+                var matindex = parts.IndexOf("Mat");
+                var conindex = parts.IndexOf("Con");
+                var indindex = parts.IndexOf("Ind");
+
+                if (matindex > 0)
+                {
+                    cell.Material = parts[matindex + 1];
+                }
+                if (conindex > 0)
+                {
+                    cell.Condition = float.Parse(parts[conindex + 1]);
+                }
+                if (indindex > 0)
+                {
+                    cell.Indoors = parts[indindex + 1] == "true" ? true : false;
+                }
+                cells.Add(cell);
+            }
+            if (cells.Count > 0)
+            {
+                _prison.Cells = cells;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool ParseObjects(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseObjects(StringBuilder block)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static bool ParseRooms(StringBuilder block)
+        private static bool ParseRooms(List<string> block)
         {
             throw new NotImplementedException();
         }
 
 
-        private static bool ParseRegime(StringBuilder block)
+        private static bool ParseRegime(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseSupplyChain(StringBuilder block)
+        private static bool ParseSupplyChain(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseFinance(StringBuilder block)
+        private static bool ParseFinance(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseElectricity(StringBuilder block)
+        private static bool ParseElectricity(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseWater(StringBuilder block)
+        private static bool ParseWater(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseResearch(StringBuilder block)
+        private static bool ParseResearch(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseConstruction(StringBuilder block)
+        private static bool ParseConstruction(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParsePenalties(StringBuilder block)
+        private static bool ParsePenalties(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseSectors(StringBuilder block)
+        private static bool ParseSectors(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseGrants(StringBuilder block)
+        private static bool ParseGrants(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseMisconduct(StringBuilder block)
+        private static bool ParseMisconduct(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseVisitation(StringBuilder block)
+        private static bool ParseVisitation(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseThermometer(StringBuilder block)
+        private static bool ParseThermometer(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseSquads(StringBuilder block)
+        private static bool ParseSquads(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseContraband(StringBuilder block)
+        private static bool ParseContraband(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseTunnels(StringBuilder block)
+        private static bool ParseTunnels(List<string> block)
         {
             throw new NotImplementedException();
         }
 
-        private static bool ParseVisibility(StringBuilder block)
+        private static bool ParseVisibility(List<string> block)
         {
             throw new NotImplementedException();
         }

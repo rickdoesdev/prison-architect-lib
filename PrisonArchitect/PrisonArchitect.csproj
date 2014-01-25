@@ -59,7 +59,7 @@
     <Compile Include="Regime.cs" />
     <Compile Include="Research.cs" />
     <Compile Include="Rooms.cs" />
-    <Compile Include="Parser\File.cs" />
+    <Compile Include="File\Parser.cs" />
     <Compile Include="Sectors.cs" />
     <Compile Include="Squads.cs" />
     <Compile Include="SupplyChain.cs" />
