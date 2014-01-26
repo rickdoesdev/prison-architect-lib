@@ -12,6 +12,11 @@ For testing purposes the pa-cli has a command line app included. It will allow d
     
 This will create 200x60 map in the relavent folder. Prison is set to Day 1, 8 AM.
 
+![](https://raw.github.com/wiki/wolflogic/prison-architect-lib/cli.png)
+
+![](https://raw.github.com/wiki/wolflogic/prison-architect-lib/2014-01-27_00004.jpg)
+
+
 Planned changes include terrain randomisation features (Generate Forests, Generate Lakes, as well as scattering patches of grass and sand) and Island Generation for maps such as http://steamcommunity.com/sharedfiles/filedetails/?id=217557027 to be made dynamically.
 
 
