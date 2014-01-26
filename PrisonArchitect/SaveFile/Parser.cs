@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace PrisonArchitect.File
+namespace PrisonArchitect.SaveFile
 {
     public class Parser
     {
@@ -194,10 +196,14 @@ namespace PrisonArchitect.File
                 }
 
                 var parts = SplitLine(line);
-                Cell cell = new Cell();
-                
-                cell.Position.X = int.Parse(parts[1].Trim(new char[] {'"'}));
-                cell.Position.Y = int.Parse(parts[2].Trim(new char[] {'"'}));
+                var cell = new Cell
+                {
+                    Position =
+                    {
+                        X = int.Parse(parts[1].Trim(new char[] {'"'})),
+                        Y = int.Parse(parts[2].Trim(new char[] {'"'}))
+                    }
+                };
 
                 var matindex = parts.IndexOf("Mat");
                 var conindex = parts.IndexOf("Con");
@@ -230,6 +236,30 @@ namespace PrisonArchitect.File
 
         private static bool ParseObjects(List<string> block)
         {
+            var blockstart = false;
+            Entity obj = null;
+
+            foreach (var line in block)
+            {
+                if (line.StartsWith("BEGIN"))
+                {
+                    blockstart = true;
+                }
+
+                // if(type == prisoner) {
+                //      obj = new Prisoner();
+                //      ParsePrisonerBlock()
+                //
+
+                // Objects can be split over multiple lines
+                // Objects can also have nested Blocks inside them ie, prisoner bio/convictions/family
+
+                if (line.EndsWith("END"))
+                {
+                    blockstart = false;
+                }
+            }
+
             throw new NotImplementedException();
         }
 

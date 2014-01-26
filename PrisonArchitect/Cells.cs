@@ -20,10 +20,10 @@ namespace PrisonArchitect
     public class Cell
     {
         public Point Position;
-        public string Material;
+        public string Material = "";  // empty is dirt
         public float Condition;
-        public Room Room;
-        public bool Indoors;
+        public Room Room = null;
+        public bool Indoors = false;
     }
 
     public class Cells : List<Cell>

@@ -46,6 +46,7 @@
     <Compile Include="Contraband.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Entities.cs" />
+    <Compile Include="SaveFile\Output.cs" />
     <Compile Include="Finance.cs" />
     <Compile Include="Grants.cs" />
     <Compile Include="Intake.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Regime.cs" />
     <Compile Include="Research.cs" />
     <Compile Include="Rooms.cs" />
-    <Compile Include="File\Parser.cs" />
+    <Compile Include="SaveFile\Parser.cs" />
     <Compile Include="Sectors.cs" />
     <Compile Include="Squads.cs" />
     <Compile Include="SupplyChain.cs" />

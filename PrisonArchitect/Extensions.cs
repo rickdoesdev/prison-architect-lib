@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PrisonArchitect
 {
@@ -25,6 +26,7 @@ namespace PrisonArchitect
 
     public static class StringExtensions
     {
+
         public static string UcFirst(this string s)
         {
             // Check for empty string.

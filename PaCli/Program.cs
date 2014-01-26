@@ -1,6 +1,6 @@
 ﻿using System;
 using PrisonArchitect;
-using PrisonArchitect.File;
+
 
 namespace PaCli
 {
@@ -8,7 +8,10 @@ namespace PaCli
     {
         static void Main(string[] args)
         {
-            var parser = new Parser("D:/Dropbox/games/Prison Architect/saves/grantededit.prison");
+            //var parser = new Parser("D:/Dropbox/games/Prison Architect/saves/grantededit.prison");
+            var p = new Prison();
+            p.Generate();
+            var output = new PrisonArchitect.SaveFile.Output(p, "D:/Dropbox/games/Prison Architect/saves/paeditor.prison");
             var readLine = Console.ReadLine();
         }
     }

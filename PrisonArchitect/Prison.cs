@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -51,7 +52,7 @@ namespace PrisonArchitect
 
         public int BioVersions { get; set; }
 
-        public Intake Intake;
+        public Intake Intake = new Intake();
 
         public Cells Cells = new Cells();
         public Objects Objects;
@@ -78,18 +79,86 @@ namespace PrisonArchitect
 
         public Prison()
         {
-            ObjectsCentreAligned = true;
-            GenerateLakes = true;
-            GenerateForests = true;
-            EnabledVisibility = true;
-            EnabledDecay = true;
-            EnabledMisconduct = true;
-            EnabledFood = true;
-            EnabledWater = true;
+            // Defaults, small prison
+            Version = "alpha-16";
+            NumCellsX = 100;
+            NumCellsY = 80;
+            OriginX = 0;
+            OriginY = 0;
+            OriginW = 100;
+            OriginH = 80;
+            TimeIndex = 481.415f;
+            RandomSeed = 1843;
+            ObjectIdNext = 136;
             EnabledElectricity = true;
+            EnabledWater = true;
+            EnabledFood = true;
+            EnabledMisconduct = true;
+            EnabledDecay = true;
+            EnabledVisibility = true;
+            GenerateLakes = false;
+            GenerateForests = true;
+            ObjectsCentreAligned = true;
+            BioVersions = 4;
+            Intake.Next = 1919.00f;
+            Intake.NumPrisoners = 8;
         }
 
-        
+        public void Generate()
+        {
+            InitialiseCells();
+        }
+
+        public void InitialiseCells()
+        {
+            var r = new Random();
+
+            for (var x = 0; x < NumCellsX; x++)
+            {
+                for (var y = 0; y < NumCellsY; y++)
+                {
+                    var cell = new Cell
+                    {
+                        Condition = (float)r.NextDouble() * 100,
+                        Position = new Point { X = x, Y = y },
+                    };
+
+                    // Set Road
+                    if (x >= NumCellsX - 12 && x <= NumCellsX - 6)
+                    {
+                        cell.Condition = 0.0f;
+                    }
+
+                    if (x == NumCellsX - 12 || x == NumCellsX - 6)
+                    {
+                        cell.Material = "ConcreteTiles";
+                    }
+
+                    if (x == NumCellsX - 11)
+                    {
+                        cell.Material = "RoadMarkingsLeft";
+                    }
+
+                    if (x > NumCellsX - 11 && x < NumCellsX - 6)
+                    {
+                        cell.Material = "Road";
+                    }
+
+                    if (x == NumCellsX - 9 && (y % 2 == 0))
+                    {
+                        cell.Material = "RoadMarkings";
+                    }
+
+                    if (x == NumCellsX - 7)
+                    {
+                        cell.Material = "RoadMarkingsRight";
+                    }
+                    // End of Road
+
+                    Cells.Add(cell);
+                }
+            }
+        }
 
         public Prison Load()
         {
