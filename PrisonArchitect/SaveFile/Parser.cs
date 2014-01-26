@@ -38,11 +38,11 @@ namespace PrisonArchitect.SaveFile
             Console.WriteLine("Parsing Prison File.");
 
             string line;
-            bool header = true;
+            var header = true;
 
             var blocklevel = 0;
             var currentBlock = new List<string>();
-            string currentblocktype = "";
+            var currentblocktype = "";
             // Read from the file until the end of the file is reached.
             while ((line = _streamReader.ReadLine()) != null)
             {
@@ -103,8 +103,8 @@ namespace PrisonArchitect.SaveFile
 
         private void ParseHeaderLine(List<string> parts)
         {
-            string key = parts[0];
-            string value = parts[1];
+            var key = parts[0];
+            var value = parts[1];
             if (_prison.HasProperty(key))
             {
                 _prison.SetProperty(key, value);
@@ -121,8 +121,8 @@ namespace PrisonArchitect.SaveFile
 
                 if (key.StartsWith("ObjectId"))
                 {
-                    string[] k = key.Split('.');
-                    string k2 = "" + k[0] + k[1].UcFirst();
+                    var k = key.Split('.');
+                    var k2 = "" + k[0] + k[1].UcFirst();
                     _prison.SetProperty(k2, value);
                     return;
                 }   
@@ -182,7 +182,7 @@ namespace PrisonArchitect.SaveFile
 
         private bool ParseCells(IEnumerable<string> block)
         {
-            var cells = new Cells();
+            var cells = new List<Cell>();
 
             foreach (var line in block)
             {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace PrisonArchitect
 {
@@ -11,39 +10,16 @@ namespace PrisonArchitect
         public Vector2 Position;
         public Vector2 Or; //? Object Rotation perhaps?
         public Room Room; // Office, Cell, ?
+        public List<Entity> Slots; // I might need to make a Slot class, but I think that the only things that can be "slot"ed are Entities anyway..
+        
+        // Are we carrying something or someone?
+        public bool Loaded;
+        public Entity Carrier;
 
-        public string ToPrisonFormat()
-        {
-            var output = new StringBuilder();
-            output.AppendFormat("BEGIN \"[i {0}]\"", Id.Internal);
-            output.AppendLine();
-
-            output.Append("END");
-            output.AppendLine();
-            return output.ToString();
-        }
+        // Are we a structure that holds a thing? I think this only happens for dogcrates at this point.
+        public int Occupied; // I've seen 4 and 5, not sure what that corresponds too
+        public Entity Occupant;
     }
-
-    // Objects includes staff, prisoners, doors, and all other random objects
-    public class Objects : List<Entity>
-    {
-        public string ToPrisonFormat()
-        {
-            var output = new StringBuilder();
-            output.Append("BEGIN Objects");
-            output.AppendLine();
-            output.AppendFormat("Size {0}", this.Count);
-            output.AppendLine();
-            foreach (var entity in this)
-            {
-                output.Append(entity.ToPrisonFormat());
-            }
-            output.Append("END");
-            output.AppendLine();
-            return output.ToString();
-        }
-    }
-
 
     public class Container : Entity
     {
@@ -66,8 +42,38 @@ namespace PrisonArchitect
         public string[] Equipment; //Clipboard, Leash, Needle, Baton ... Guns/Knives/Spoons/Forks?
     }
 
-    // Is this needed ??
+    // Is this Necessary?
     public class Staff : Person
     {
+    }
+
+    public class Electrical : Entity
+    {
+        public bool Powered;
+        public bool On;
+        public bool ExternalPower;
+    }
+
+    public class Light : Electrical
+    {
+        public Light()
+        {
+            Type = "Light";
+        }
+    }
+
+    public class OutdoorLight : Light
+    {
+        public OutdoorLight()
+        {
+            Powered = true;
+            On = true;
+            ExternalPower = true;
+        }
+    }
+
+    public class Vehicle : Entity
+    {
+        public float Speed;
     }
 }
