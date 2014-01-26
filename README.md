@@ -8,7 +8,8 @@ Still very basic set of interactions, but as of 27/01/14 it can now generate a f
 For testing purposes the pa-cli has a command line app included. It will allow different prisons to be made beyond the core set of 100x80, 150x120, 200x160. Tests with 80x60, 200x100, 320x240 generated correctly. (Though 320x240 is performance intensive). It defaults to 100x80 and requires a path to write the file to.
 
 
-PaCli.exe  --out "D:\Dropbox\games\Prison Architect\saves\paeditor.prison" -w 200 -h 60
+    PaCli.exe  --out "D:\Dropbox\games\Prison Architect\saves\paeditor.prison" -w 200 -h 60
+    
 This will create 200x60 map in the relavent folder. Prison is set to Day 1, 8 AM.
 
 Planned changes include terrain randomisation features (Generate Forests, Generate Lakes, as well as scattering patches of grass and sand) and Island Generation for maps such as http://steamcommunity.com/sharedfiles/filedetails/?id=217557027 to be made dynamically.
